@@ -5,12 +5,12 @@ list_dict = {}
 def add_item(item):
     key_num = 1
     value = item
-    list_dict[key_num] = value
+    list_dict[key_num] = value + ' - Not Done'
     while value != "Stop":
         key_num += 1
         value = input("Enter an item: ")
         if value != "Stop":
-            list_dict[key_num] = value
+            list_dict[key_num] = value + ' - Not Done'
         else:
             print("\n")
             print_list()
@@ -25,7 +25,7 @@ def remove_item(item_num):
 
 #Update items: takes in item num and the item
 def update_item(item_num, item):
-    list_dict[item_num] = item
+    list_dict[item_num] = item + ' - Not Done'
     print_list()
     start()
 
@@ -36,6 +36,15 @@ def add_item_after(item):
     list_dict[last_key] = item
     print_list()
     start()
+
+
+#Change item to done.
+def change_to_done(item_num):
+    current_item = list_dict[item_num]
+    list_dict[item_num] = current_item.replace("Not ", "")
+    print_list()
+    start()
+
 
 #Prints the list
 def print_list():
@@ -54,6 +63,9 @@ def choose_option(choice):
     elif choice.upper() == 'D':
         item_num = int(input("Enter the item number: "))
         remove_item(item_num)
+    elif choice.upper() == 'M':
+        item_num = int(input("Enter the item number to be marked as done: "))
+        change_to_done(item_num)
 
 
 
@@ -68,6 +80,7 @@ def start():
     Enter 'A' to add an item
     Enter 'U' to update an existing item
     Enter 'D' to delete an item
+    Enter 'M' to mark item as done
     **Enter any other character to end**
         """)
 
@@ -75,3 +88,5 @@ def start():
 
 
 start()
+#Delete method does not upadate index number.
+#Comment out delete and add task done.
